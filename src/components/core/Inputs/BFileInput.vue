@@ -35,12 +35,27 @@ const props = defineProps({
 });
 
 const { getFor } = useUtils({id:props.id})
+
 const emit = defineEmits(["update:modelValue"]);
 
 const input = (data) => {
   console.log(data.target.value);
   emit("update:modelValue", data.target.value);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function isRequired(value) {
   if (value && value.trim()) {
     return true;

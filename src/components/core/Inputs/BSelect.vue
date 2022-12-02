@@ -1,8 +1,8 @@
 <template>
 <div>
 
-    <label v-if="props.label"  for="validationCustom04" class="form-label">{{props.label}}</label>
-    <select class="form-select" id="validationCustom04" required>
+    <label v-if="props.label"   class="form-label">{{props.label}}</label>
+    <select class="form-select" required>
       <option selected disabled value="">Choose...</option>
       <option v-for="option of options" :key="option.value">{{option.label}}</option>
     </select>

@@ -1,25 +1,27 @@
 <template>
   <div>
-    {{nameRef}}
-    {{value}}
-    {{errorMessage}}
-    <label v-if="props.label" :for="getFor">{{ props.label }}</label>
+    <label v-if="label" :for="getFor">{{ label }}</label>
     <input
       :id="getFor"
-      :type="props.type"
-      :value="modelValue"
-      :name="props.name"
+      :type="type"
+      v-model="value"
+      :name="name"
       class="form-control"
+      v-bind:class="{ 
+        'is-invalid': errorMessage,
+        'is-valid': meta.valid && rule
+      }"
       @input="input"
-      :placeholder="props.placeholder"
+      :placeholder="placeholder"
     />
     <div class="valid-feedback">Looks good!</div>
-    <div class="invalid-feedback">Please provide a valid city.</div>
+    <div class="invalid-feedback">{{errorMessage}}</div>
   </div>
 </template>
 <script setup>
-import { defineProps, defineEmits } from "vue";
-// import { useField } from 'vee-validate';
+// eslint-disable-next-line no-unused-vars
+import { defineProps, defineEmits, toRef } from "vue";
+import { useField } from 'vee-validate';
 
 import { useUtils } from '../utils/useUtils'
 const props = defineProps({
@@ -31,6 +33,7 @@ const props = defineProps({
   label: String,
   type: String,
   id: String,
+  rule: [String, Object],
   placeholder: String,
 });
 
@@ -39,7 +42,6 @@ const { getFor } = useUtils({id:props.id})
 const emit = defineEmits(["update:modelValue"]);
 
 const input = (data) => {
- 
   if (data.target.type === 'file') {
      const selectedFile = data.target.files;
     emit("update:modelValue", selectedFile);   
@@ -48,26 +50,10 @@ const input = (data) => {
   }
 };
 
+ 
+const { errorMessage, meta, value } = useField(props.name, props.rule ? props.rule : { required: false,validate: false }, {
+  uncheckedValue: false,
+  validateOnMount: true,
+ });
 
-
-
-
-
-
-
-
-
-
-
-
-/* 
-function isRequired(value) {
-  if (value && value.trim()) {
-    return true;
-  }
-  return 'This is required ,';
-}
-const nameRef = toRef(props.modelValue, props.name);
-console.log(props.modelValue)
-const { errorMessage, value } = useField(nameRef, isRequired); */
 </script>

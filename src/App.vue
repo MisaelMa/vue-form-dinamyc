@@ -1,35 +1,30 @@
 <template>
   <div class="container">
-    <div style="border: solid 1px blue; padding: 20px">
-      {{aqui}}
-      
-      <BTextField v-model="aqui"></BTextField>  
-      <span>{{ errorMessage }}</span>
-
-    </div>
-    
-    {{inputsFields[0].modelValue}}
-    {{inputsFields[1].modelValue}}
-    {{inputsFields[2].modelValue ? inputsFields[2].modelValue[0].name : 'nada'}}
     <c-form id="amir" 
             @submit="onSubmit"
             class="row g-3 needs-validation" 
             novalidate 
             :fields="inputsFields"/>
+            <c-form id="amir2" 
+            @submit="onSubmit"
+            class="row g-3 needs-validation" 
+            novalidate 
+            :fields="inputsFields2"/>
       </div>
 </template>
 
 <script>
 import CForm from "./components/core/Form";
 import { defineComponent, ref } from "vue";
-import BTextField from "./components/core/Inputs/BTextField.vue"
-import { inputsFields } from './common/forms/login.form';
-
+import { inputsFields, inputsFields2 } from './common/forms/login.form';
+ // eslint-disable-next-line no-empty-pattern, no-unused-vars
+import { useForm } from 'vee-validate';
 import { useField } from 'vee-validate';
 export default defineComponent({
   name: "App",
   components: {
-    BTextField,
+    
+    // eslint-disable-next-line vue/no-unused-components
     CForm
   },
   setup() {
@@ -42,21 +37,28 @@ export default defineComponent({
     const getNextPage = (emitPage) => {
       console.log("next",emitPage)
     };
- function onSubmit() {
-      console.log('Submitted');
-    }
+    
+    // a simple `name` field with basic required validator
+    const { value, errorMessage } = useField('name', inputValue => !!inputValue);
 
-// a simple `name` field with basic required validator
-const { value, errorMessage } = useField('name', inputValue => !!inputValue);
+ // eslint-disable-next-line no-empty-pattern, no-unused-vars
+const { handleSubmit } = useForm();
+const { value: email } = useField('email');
+
+const onSubmit = handleSubmit(values => {
+  alert(JSON.stringify(values, null, 2));
+});
 
     return {
+      email,
+      onSubmit,
        value, errorMessage ,
       page,
-      onSubmit,
       aqui,
       getBeforePage,
       getNextPage,
       inputsFields,
+      inputsFields2
     };
   },
 });
