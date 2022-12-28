@@ -1,6 +1,7 @@
-import { reactive,  } from "vue";
-
 import * as yup from 'yup';
+
+import { reactive, } from "vue";
+
 export const inputsFields = reactive([
       {
         label: 'name',
@@ -43,6 +44,16 @@ export const inputsFields = reactive([
 
 
     export const inputsFields2 = reactive([
+      {
+        label: 'hola mundo',
+        type: 'text',
+        name: 'gola',
+        placeholder: "Hola",
+        components: 'BTextField',
+        rule: yup.string().required('Please Enter your ssjsj').min(8),
+        class: 'col-md-6'
+      },
+
       {
         label: 'name',
         type: 'text',
