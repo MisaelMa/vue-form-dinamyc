@@ -1,12 +1,15 @@
-import { defineComponent, h, 
-   // ref, 
-   toRefs,
-   resolveComponent 
+import {
+   defineComponent,
+   h,
+   resolveComponent,
+   toRefs
 } from "vue";
-import BTextField from "./Inputs/BTextField.vue"
+
 import BSelect from "./Inputs/BSelect.vue"
- // eslint-disable-next-line no-empty-pattern, no-unused-vars
+import BTextField from "./Inputs/BTextField.vue"
 import { useForm } from 'vee-validate';
+
+// eslint-disable-next-line no-empty-pattern, no-unused-vars
 export default defineComponent({
   name: "FormBuild",
   props: {
@@ -32,7 +35,7 @@ export default defineComponent({
 const { handleSubmit, values }  = useForm({
   validateOnMount: true,
   initialValues:{
-userName:"jose"
+    userName:"jose"
   }
 });
     return () =>h('div',{},

@@ -2,7 +2,8 @@ import * as yup from 'yup';
 
 import { reactive, } from "vue";
 
-export const inputsFields = reactive([
+export const inputsFields = reactive(
+  [
       {
         label: 'name',
         type: 'text',
@@ -10,6 +11,14 @@ export const inputsFields = reactive([
         placeholder: "Hola",
         components: 'BTextField',
         rule: yup.string().required('Please Enter your Email').min(8),
+        class: 'col-md-6'
+      },
+      {
+        label: 'año',
+        type: 'number',
+        name: 'anio',
+        placeholder: "ejemplo ingresa año",
+        components: 'BTextField',
         class: 'col-md-6'
       },
       {
@@ -21,16 +30,8 @@ export const inputsFields = reactive([
         class: 'col-md-6'
       },
       {
-        id:"file-test",
-        name: 'file',
-        label: 'Upload Picture',
-        type: 'file',
-        components: 'BTextField',
-        class: 'col-md-12'
-      },
-      {
-        label: 'password',
-        type: 'password',
+        label: 'optiones',
+        type: 'select',
         name: 'password',
         components: 'BSelect',
         options: [
