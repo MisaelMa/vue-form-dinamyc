@@ -46,16 +46,7 @@ const estados = ref([
   },
 ])
 
-const municipios = ref([
-  {
-    label: 'Playa del Carmen',
-    value: '1',
-  },
-  {
-    label: 'Cancún',
-    value: '2',
-  },
-])
+const municipios = ref([])
 
 const onChangeOptions = (e) => {
   const stadoId = e.target.value

@@ -58,7 +58,7 @@ export const form1 = ({
     },
     {
       props: {
-        label: 'optiones',
+        label: 'Estados',
         type: 'select',
         name: 'options',
         itemText: 'label',
